@@ -1,6 +1,4 @@
 <script>
-	let data;
-
 	let usr;
 	let pwd;
 
@@ -13,12 +11,10 @@
         		"Content-type": "application/json; charset=UTF-8"
     		}
 		})
-		
-		data = await res.text()
+		console.log(await res.json())
 	}
 </script>
 
-<main bind:innerHTML={data} contenteditable="true"></main>
 <p>Username:</p>
 <input bind:value={usr}>
 <p>Password:</p>
