@@ -1,26 +1,23 @@
 <script>
-	let usr;
-	let pwd;
+	import Login from "./pages/Login.svelte";
+	import Home from "./pages/Home.svelte";
 
-	async function submit(){
-		const url = "http://127.0.0.1:5000"
-		const res = await fetch(url, {
-			method: "POST", 
-			body: JSON.stringify({usr: usr, pwd: pwd}),
-			headers: {
-        		"Content-type": "application/json; charset=UTF-8"
-    		}
-		})
-		console.log(await res.json())
-	}
+	const pages = ["Login", "Home"]
+	let active_page = pages[0]
 </script>
 
-<p>Username:</p>
-<input bind:value={usr}>
-<p>Password:</p>
-<input bind:value={pwd} type="password" /> <br>
-<button on:click={submit}>Submit</button>
 
+<navbar>
+	<button on:click={()=>{active_page = pages[1]}}>Home</button>
+	<button on:click={()=>{active_page = pages[0]}}>Login</button>
+</navbar>
+<main>
+	{#if active_page === pages[0]}
+		<Login/>
+	{:else if active_page === pages[1]}
+		<Home/>
+	{/if}
+</main>
 
 <style>
 	
