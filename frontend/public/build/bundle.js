@@ -49,6 +49,13 @@ var app = (function () {
         node.addEventListener(event, handler, options);
         return () => node.removeEventListener(event, handler, options);
     }
+    function prevent_default(fn) {
+        return function (event) {
+            event.preventDefault();
+            // @ts-ignore
+            return fn.call(this, event);
+        };
+    }
     function attr(node, attribute, value) {
         if (value == null)
             node.removeAttribute(attribute);
@@ -155,19 +162,6 @@ var app = (function () {
     }
     const outroing = new Set();
     let outros;
-    function group_outros() {
-        outros = {
-            r: 0,
-            c: [],
-            p: outros // parent group
-        };
-    }
-    function check_outros() {
-        if (!outros.r) {
-            run_all(outros.c);
-        }
-        outros = outros.p;
-    }
     function transition_in(block, local) {
         if (block && block.i) {
             outroing.delete(block);
@@ -396,67 +390,109 @@ var app = (function () {
     const file$1 = "src\\pages\\Login.svelte";
 
     function create_fragment$2(ctx) {
-    	let p0;
+    	let main;
+    	let form;
+    	let h1;
     	let t1;
-    	let input0;
-    	let t2;
-    	let p1;
+    	let div0;
+    	let label0;
+    	let t3;
+    	let br0;
     	let t4;
-    	let input1;
+    	let input0;
     	let t5;
-    	let br;
-    	let t6;
+    	let div1;
+    	let label1;
+    	let t7;
+    	let br1;
+    	let t8;
+    	let input1;
+    	let t9;
     	let button;
     	let mounted;
     	let dispose;
 
     	const block = {
     		c: function create() {
-    			p0 = element("p");
-    			p0.textContent = "Username:";
+    			main = element("main");
+    			form = element("form");
+    			h1 = element("h1");
+    			h1.textContent = "OneCard Dashboard";
     			t1 = space();
-    			input0 = element("input");
-    			t2 = space();
-    			p1 = element("p");
-    			p1.textContent = "Password:";
+    			div0 = element("div");
+    			label0 = element("label");
+    			label0.textContent = "NetlinkID";
+    			t3 = space();
+    			br0 = element("br");
     			t4 = space();
-    			input1 = element("input");
+    			input0 = element("input");
     			t5 = space();
-    			br = element("br");
-    			t6 = space();
+    			div1 = element("div");
+    			label1 = element("label");
+    			label1.textContent = "Password";
+    			t7 = space();
+    			br1 = element("br");
+    			t8 = space();
+    			input1 = element("input");
+    			t9 = space();
     			button = element("button");
-    			button.textContent = "Submit";
-    			add_location(p0, file$1, 17, 0, 347);
-    			add_location(input0, file$1, 18, 0, 365);
-    			add_location(p1, file$1, 19, 0, 391);
+    			button.textContent = "Login";
+    			attr_dev(h1, "class", "svelte-i76kxy");
+    			add_location(h1, file$1, 18, 2, 393);
+    			attr_dev(label0, "for", "usr");
+    			add_location(label0, file$1, 20, 3, 433);
+    			add_location(br0, file$1, 20, 38, 468);
+    			attr_dev(input0, "name", "usr");
+    			attr_dev(input0, "class", "svelte-i76kxy");
+    			add_location(input0, file$1, 21, 3, 477);
+    			add_location(div0, file$1, 19, 2, 423);
+    			attr_dev(label1, "for", "pwd");
+    			add_location(label1, file$1, 24, 3, 536);
+    			add_location(br1, file$1, 24, 37, 570);
+    			attr_dev(input1, "name", "pwd");
     			attr_dev(input1, "type", "password");
-    			add_location(input1, file$1, 20, 0, 409);
-    			add_location(br, file$1, 20, 43, 452);
-    			add_location(button, file$1, 21, 0, 458);
+    			attr_dev(input1, "class", "svelte-i76kxy");
+    			add_location(input1, file$1, 25, 3, 579);
+    			add_location(div1, file$1, 23, 2, 526);
+    			attr_dev(button, "type", "submit");
+    			attr_dev(button, "class", "svelte-i76kxy");
+    			add_location(button, file$1, 27, 2, 647);
+    			attr_dev(form, "class", "svelte-i76kxy");
+    			add_location(form, file$1, 17, 1, 350);
+    			attr_dev(main, "class", "svelte-i76kxy");
+    			add_location(main, file$1, 16, 0, 341);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, p0, anchor);
-    			insert_dev(target, t1, anchor);
-    			insert_dev(target, input0, anchor);
+    			insert_dev(target, main, anchor);
+    			append_dev(main, form);
+    			append_dev(form, h1);
+    			append_dev(form, t1);
+    			append_dev(form, div0);
+    			append_dev(div0, label0);
+    			append_dev(div0, t3);
+    			append_dev(div0, br0);
+    			append_dev(div0, t4);
+    			append_dev(div0, input0);
     			set_input_value(input0, /*usr*/ ctx[0]);
-    			insert_dev(target, t2, anchor);
-    			insert_dev(target, p1, anchor);
-    			insert_dev(target, t4, anchor);
-    			insert_dev(target, input1, anchor);
+    			append_dev(form, t5);
+    			append_dev(form, div1);
+    			append_dev(div1, label1);
+    			append_dev(div1, t7);
+    			append_dev(div1, br1);
+    			append_dev(div1, t8);
+    			append_dev(div1, input1);
     			set_input_value(input1, /*pwd*/ ctx[1]);
-    			insert_dev(target, t5, anchor);
-    			insert_dev(target, br, anchor);
-    			insert_dev(target, t6, anchor);
-    			insert_dev(target, button, anchor);
+    			append_dev(form, t9);
+    			append_dev(form, button);
 
     			if (!mounted) {
     				dispose = [
     					listen_dev(input0, "input", /*input0_input_handler*/ ctx[3]),
     					listen_dev(input1, "input", /*input1_input_handler*/ ctx[4]),
-    					listen_dev(button, "click", /*submit*/ ctx[2], false, false, false)
+    					listen_dev(form, "submit", prevent_default(/*login*/ ctx[2]), false, true, false)
     				];
 
     				mounted = true;
@@ -474,17 +510,7 @@ var app = (function () {
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(p0);
-    			if (detaching) detach_dev(t1);
-    			if (detaching) detach_dev(input0);
-    			if (detaching) detach_dev(t2);
-    			if (detaching) detach_dev(p1);
-    			if (detaching) detach_dev(t4);
-    			if (detaching) detach_dev(input1);
-    			if (detaching) detach_dev(t5);
-    			if (detaching) detach_dev(br);
-    			if (detaching) detach_dev(t6);
-    			if (detaching) detach_dev(button);
+    			if (detaching) detach_dev(main);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -507,7 +533,7 @@ var app = (function () {
     	let usr;
     	let pwd;
 
-    	async function submit() {
+    	async function login() {
     		const url = "http://127.0.0.1:5000";
 
     		const res = await fetch(url, {
@@ -537,7 +563,7 @@ var app = (function () {
     		$$invalidate(1, pwd);
     	}
 
-    	$$self.$capture_state = () => ({ usr, pwd, submit });
+    	$$self.$capture_state = () => ({ usr, pwd, login });
 
     	$$self.$inject_state = $$props => {
     		if ('usr' in $$props) $$invalidate(0, usr = $$props.usr);
@@ -548,7 +574,7 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [usr, pwd, submit, input0_input_handler, input1_input_handler];
+    	return [usr, pwd, login, input0_input_handler, input1_input_handler];
     }
 
     class Login extends SvelteComponentDev {
@@ -620,7 +646,7 @@ var app = (function () {
     /* src\App.svelte generated by Svelte v3.50.1 */
     const file = "src\\App.svelte";
 
-    // (17:36) 
+    // (12:36) 
     function create_if_block_1(ctx) {
     	let home;
     	let current;
@@ -652,14 +678,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(17:36) ",
+    		source: "(12:36) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (15:1) {#if active_page === pages[0]}
+    // (10:1) {#if active_page === pages[0]}
     function create_if_block(ctx) {
     	let login;
     	let current;
@@ -691,7 +717,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(15:1) {#if active_page === pages[0]}",
+    		source: "(10:1) {#if active_page === pages[0]}",
     		ctx
     	});
 
@@ -699,23 +725,16 @@ var app = (function () {
     }
 
     function create_fragment(ctx) {
-    	let navbar;
-    	let button0;
-    	let t1;
-    	let button1;
-    	let t3;
     	let main;
     	let current_block_type_index;
     	let if_block;
     	let current;
-    	let mounted;
-    	let dispose;
     	const if_block_creators = [create_if_block, create_if_block_1];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
-    		if (/*active_page*/ ctx[0] === /*pages*/ ctx[1][0]) return 0;
-    		if (/*active_page*/ ctx[0] === /*pages*/ ctx[1][1]) return 1;
+    		if (/*active_page*/ ctx[1] === /*pages*/ ctx[0][0]) return 0;
+    		if (/*active_page*/ ctx[1] === /*pages*/ ctx[0][1]) return 1;
     		return -1;
     	}
 
@@ -725,29 +744,15 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			navbar = element("navbar");
-    			button0 = element("button");
-    			button0.textContent = "Home";
-    			t1 = space();
-    			button1 = element("button");
-    			button1.textContent = "Login";
-    			t3 = space();
     			main = element("main");
     			if (if_block) if_block.c();
-    			add_location(button0, file, 10, 1, 177);
-    			add_location(button1, file, 11, 1, 240);
-    			add_location(navbar, file, 9, 0, 167);
-    			add_location(main, file, 13, 0, 313);
+    			attr_dev(main, "class", "svelte-wmanj0");
+    			add_location(main, file, 8, 0, 166);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, navbar, anchor);
-    			append_dev(navbar, button0);
-    			append_dev(navbar, t1);
-    			append_dev(navbar, button1);
-    			insert_dev(target, t3, anchor);
     			insert_dev(target, main, anchor);
 
     			if (~current_block_type_index) {
@@ -755,46 +760,8 @@ var app = (function () {
     			}
 
     			current = true;
-
-    			if (!mounted) {
-    				dispose = [
-    					listen_dev(button0, "click", /*click_handler*/ ctx[2], false, false, false),
-    					listen_dev(button1, "click", /*click_handler_1*/ ctx[3], false, false, false)
-    				];
-
-    				mounted = true;
-    			}
     		},
-    		p: function update(ctx, [dirty]) {
-    			let previous_block_index = current_block_type_index;
-    			current_block_type_index = select_block_type(ctx);
-
-    			if (current_block_type_index !== previous_block_index) {
-    				if (if_block) {
-    					group_outros();
-
-    					transition_out(if_blocks[previous_block_index], 1, 1, () => {
-    						if_blocks[previous_block_index] = null;
-    					});
-
-    					check_outros();
-    				}
-
-    				if (~current_block_type_index) {
-    					if_block = if_blocks[current_block_type_index];
-
-    					if (!if_block) {
-    						if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-    						if_block.c();
-    					}
-
-    					transition_in(if_block, 1);
-    					if_block.m(main, null);
-    				} else {
-    					if_block = null;
-    				}
-    			}
-    		},
+    		p: noop,
     		i: function intro(local) {
     			if (current) return;
     			transition_in(if_block);
@@ -805,16 +772,11 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(navbar);
-    			if (detaching) detach_dev(t3);
     			if (detaching) detach_dev(main);
 
     			if (~current_block_type_index) {
     				if_blocks[current_block_type_index].d();
     			}
-
-    			mounted = false;
-    			run_all(dispose);
     		}
     	};
 
@@ -840,25 +802,17 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
-    	const click_handler = () => {
-    		$$invalidate(0, active_page = pages[1]);
-    	};
-
-    	const click_handler_1 = () => {
-    		$$invalidate(0, active_page = pages[0]);
-    	};
-
     	$$self.$capture_state = () => ({ Login, Home, pages, active_page });
 
     	$$self.$inject_state = $$props => {
-    		if ('active_page' in $$props) $$invalidate(0, active_page = $$props.active_page);
+    		if ('active_page' in $$props) $$invalidate(1, active_page = $$props.active_page);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [active_page, pages, click_handler, click_handler_1];
+    	return [pages, active_page];
     }
 
     class App extends SvelteComponentDev {

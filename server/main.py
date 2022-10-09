@@ -2,11 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import os
 
 
-template_dir = os.path.abspath('../frontend/public/')
-app = Flask(__name__, template_folder=template_dir)
+app = Flask(__name__)
 CORS(app)
 
 
@@ -21,9 +19,10 @@ def data():
     if request.method != "POST" and request.method != "OPTIONS":
         return jsonify(data), 400
 
-    
     with requests.Session() as s:
         content = request.json
+        if getattr(content, "usr", None) == None or getattr(content, "pwd", None) == None:
+            return jsonify(data), 400
         # retrieve data
 
         response = s.get(URL, allow_redirects=True)
@@ -49,7 +48,7 @@ def data():
         balance_values = onecard_html.find_all("span", attrs={"class": "transaction-amt"})
         
         for i, balance_name in enumerate(balance_names):
-            if balance_name.text not in ["Market", "Servery"]:
+            if balance_name.text not in {"Market", "Servery"}:
                 balances[balance_name.text] = balance_values[i].text
                 data["balances"] = balances
 

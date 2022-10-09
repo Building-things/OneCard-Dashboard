@@ -6,11 +6,6 @@
 	let active_page = pages[0]
 </script>
 
-
-<navbar>
-	<button on:click={()=>{active_page = pages[1]}}>Home</button>
-	<button on:click={()=>{active_page = pages[0]}}>Login</button>
-</navbar>
 <main>
 	{#if active_page === pages[0]}
 		<Login/>
@@ -20,5 +15,7 @@
 </main>
 
 <style>
-	
+	main{
+		background-color: var(--background-main-colour);
+	}
 </style>

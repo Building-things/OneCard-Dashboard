@@ -1,0 +1,10 @@
+body{
+    --background-main-colour: #2a2a2c;
+    --background-accent-colour: #333333;
+    --accent-colour: #e81c1c;
+    --accent-darker-colour: #c90909;
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-family: sans-serif;
+}

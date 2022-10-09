@@ -1,8 +1,7 @@
 <script>
-    let usr;
+	let usr;
 	let pwd;
-
-	async function submit(){
+	async function login(){
 		const url = "http://127.0.0.1:5000"
 		const res = await fetch(url, {
 			method: "POST", 
@@ -15,8 +14,65 @@
 	}
 </script>
 
-<p>Username:</p>
-<input bind:value={usr}>
-<p>Password:</p>
-<input bind:value={pwd} type="password" /> <br>
-<button on:click={submit}>Submit</button>
+<main>
+	<form on:submit|preventDefault={login}>
+		<h1>OneCard Dashboard</h1>
+		<div>
+			<label for="usr">NetlinkID</label> <br>
+			<input name="usr" bind:value={usr}>
+		</div>
+		<div>
+			<label for="pwd">Password</label> <br>
+			<input name="pwd" type="password"  bind:value={pwd}/> 
+		</div>
+		<button type="submit">Login</button>
+	</form>
+</main>
+
+<style>
+	form{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-evenly;
+		background-color: var(--background-accent-colour);
+		width: 80%;
+		height: 60%;
+		color: white;
+	}
+	@media only screen and (min-width: 600px){
+		form{
+			max-width: 450px;
+		}
+	}
+	main{
+		height: 100vh;
+		width: 100vw;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	h1{
+		display: block;
+		font-size: 1.6rem;
+	}
+	input{
+		background-color: var(--background-main-colour);
+		border: none;
+		font-size: 1rem;
+		padding: 5px;
+		color: white;
+		margin-top: 10px;
+	}
+	button[type="submit"]{
+		width: 80%;
+		height: 32px;
+		font-size: 1rem;
+		background-color: var(--accent-colour);
+		border: none;
+	}
+	button[type="submit"]:hover{
+		background-color: var(--accent-darker-colour);
+	}
+</style>
