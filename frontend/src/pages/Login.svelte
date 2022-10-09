@@ -1,4 +1,8 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+
 	let usr;
 	let pwd;
 	async function login(){
@@ -10,7 +14,11 @@
         		"Content-type": "application/json; charset=UTF-8"
     		}
 		})
-		console.log(await res.json())
+		//TODO change if(true) to if(res.ok) when testing for release
+		if(true){
+			//sends our user data along
+			dispatch("navigate", await res.json());
+		}
 	}
 </script>
 
@@ -25,7 +33,7 @@
 			<label for="pwd">Password</label> <br>
 			<input name="pwd" type="password"  bind:value={pwd}/> 
 		</div>
-		<button type="submit">Login</button>
+		<button type="submit" class="button">Login</button>
 	</form>
 </main>
 
@@ -68,11 +76,6 @@
 	button[type="submit"]{
 		width: 80%;
 		height: 32px;
-		font-size: 1rem;
-		background-color: var(--accent-colour);
-		border: none;
-	}
-	button[type="submit"]:hover{
-		background-color: var(--accent-darker-colour);
+		
 	}
 </style>

@@ -21,7 +21,7 @@ def data():
 
     with requests.Session() as s:
         content = request.json
-        if getattr(content, "usr", None) == None or getattr(content, "pwd", None) == None:
+        if content.get("usr", None) == None or content.get("usr", None) == None:
             return jsonify(data), 400
         # retrieve data
 
