@@ -49,7 +49,8 @@ def data():
         
         for i, balance_name in enumerate(balance_names):
             if balance_name.text not in {"Market", "Servery"}:
-                balances[balance_name.text] = balance_values[i].text
+                #the text[1:] removes the dollar sign
+                balances[balance_name.text] = balance_values[i].text[1:]
                 data["balances"] = balances
 
         return jsonify(data)
