@@ -3,6 +3,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
+    "forceConsistentCasingInFileNames": false,
     "module": "ESNext",
     "resolveJsonModule": true,
     "baseUrl": ".",

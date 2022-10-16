@@ -6,4 +6,28 @@
 
 :root{
     font-family: sans-serif;
+    --background-main-colour: #2a2a2c;
+    --background-accent-colour: #333333;
+    --accent-colour: #e81c1c;
+    --accent-darker-colour: #c90909;
+}
+
+/*default styling for all pages*/
+main{
+    color: white;
+    background-color: var(--background-main-colour);
+    width: 100vw;
+}
+
+/* class so all buttons feel the same */
+.button{
+    font-size: 1rem;
+    padding: 5px;
+    box-sizing: border-box;
+    background-color: var(--accent-colour);
+    border: none;
+}
+
+.button:hover{
+    background-color: var(--accent-darker-colour);
 }
