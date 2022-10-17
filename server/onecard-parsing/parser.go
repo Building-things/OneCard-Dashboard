@@ -12,9 +12,9 @@ import (
 )
 
 type Balances_T struct {
-	ResidenceMealPlan float64
-	PlusMealPlan      float64
-	Flex              float64
+	StandardMealPlan float64
+	PlusMealPlan     float64
+	Flex             float64
 }
 type Transaction_T struct {
 	Location string
@@ -105,7 +105,7 @@ func OneCardData(username string, password string) (ONECardData, bool) {
 
 		switch i {
 		case 0:
-			data.Balances.ResidenceMealPlan = amt
+			data.Balances.StandardMealPlan = amt
 		case 1:
 			data.Balances.PlusMealPlan = amt
 		case 2:
@@ -131,6 +131,10 @@ func OneCardData(username string, password string) (ONECardData, bool) {
 	})
 
 	return data, true
+}
+
+func TestData() ONECardData {
+	return ONECardData{Balances: Balances_T{StandardMealPlan: 100, Flex: 100, PlusMealPlan: 100}}
 }
 
 // not my functions rounds the floats for me though

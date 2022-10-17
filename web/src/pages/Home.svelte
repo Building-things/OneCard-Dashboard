@@ -1,6 +1,5 @@
 <script>
-
-    import Ring from "c:/Users/leona/Github repos/OneCard-Dashboard/web/src/components/Ring.svelte";
+    import Ring from "../components/Ring.svelte";
     import {oneCardData, page} from "../ts/store";
     
     function logout(){
@@ -13,7 +12,7 @@
 
     <input type="button" class="button logout-button" value="Logout" on:click={logout}>
     <div class="ring">
-        <Ring value_of_current={$oneCardData.balances.standardMealPlan} value_of_total=1291.75></Ring>
+        <Ring value_of_current={$oneCardData.Balances?.StandardMealPlan} value_of_total=1291.75></Ring>
     </div>
 </main>
 

@@ -10,7 +10,11 @@ page.subscribe(page => {
 })
 
 const storedOneCardData = localStorage.getItem("oneCardData");
-export const oneCardData:Writable<OneCardData> = writable(JSON.parse(storedOneCardData));
+let storedData: OneCardData = {Balances: null, Transactions: null}
+try{
+    storedData = JSON.parse(storedOneCardData)
+}catch(err){}
+export const oneCardData:Writable<OneCardData> = writable(storedData);
 oneCardData.subscribe(data =>{
     localStorage.setItem("oneCardData", JSON.stringify(data));
 })
@@ -18,18 +22,18 @@ oneCardData.subscribe(data =>{
 
 //user data from server
 interface Transaction{
-    location: string,
-    amount: Number,
-    date: string,
+    Location: string,
+    Amount: Number,
+    Date: string,
 }
 interface OneCardData{
-    balances: {
-        standardMealPlan: Number,
-        plusMealPlan: Number,
-        flex: Number,
-    }
-    transactions: {
-        recent: Array<Transaction>
-        all: Array<Transaction>
-    }
+    Balances: {
+        StandardMealPlan: Number,
+        PlusMealPlan: Number,
+        Flex: Number,
+    } | null
+    Transactions: {
+        Recent: Array<Transaction>
+        All: Array<Transaction>
+    } | null
 }

@@ -27,6 +27,9 @@ func Root(c *fiber.Ctx) error {
 	if err != nil {
 		return c.SendStatus(400)
 	}
+	if payload.Username == "test" {
+		return c.JSON(onecardparsing.TestData())
+	}
 
 	data, ok := onecardparsing.OneCardData(payload.Username, payload.Password)
 	if !ok {
