@@ -4,7 +4,7 @@
 
 <main>
     <div>
-        <p>{$oneCardData.transactions}</p>
+        <p>{$oneCardData.Transactions}</p>
     </div>
 </main>
 
