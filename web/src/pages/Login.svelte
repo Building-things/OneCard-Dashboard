@@ -1,6 +1,8 @@
 <script lang="ts">
     import {oneCardData, page} from "../ts/store"
 
+    let formError = false;
+
     async function login(event: SubmitEvent){
         const formData = new FormData(event.target)
         const serverURL = "http://127.0.0.1:5000";
@@ -13,9 +15,10 @@
             console.log($oneCardData);
             page.set("home");
         }else{
-            //TODO ERROR
+            formError = true;
         }
     }
+
 
     
 </script>
@@ -33,6 +36,9 @@
                 <input type="password" name="password">
             </div>
             <button class="button" type="submit">Submit</button>
+            <div class="{formError ? "" : "hidden"} error">
+                <p>Your NetlinkID or Password Is Invalid</p>
+            </div>  
         </form>
     </div>
 </main>
@@ -42,6 +48,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+    .hidden{
+        visibility: hidden;
     }
     main{
         height: 100vh;
@@ -69,5 +78,11 @@
         form{
             width: 600px;
         }
+    }
+    .error{
+        box-sizing: border-box;
+        padding: 10%;
+        background-color: rgba(255, 0, 0, 0.5);
+        border: 1px solid red;
     }
 </style>
