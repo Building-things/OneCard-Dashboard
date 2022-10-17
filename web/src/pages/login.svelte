@@ -4,15 +4,20 @@
     let formError = false;
 
     async function login(event: SubmitEvent){
-        const formData = new FormData(event.target)  //ignore this error
+        //if this data is populated no need to log back in
+        if($oneCardData?.Balances?.StandardMealPlan){
+            page.set("home");
+            return;
+        }
+        const formData = new FormData(event.target) 
         const serverURL = "http://127.0.0.1:5000";
         const res = await fetch(serverURL, {
             method: "POST",
             body: formData,
         })
         if(res.ok){
-            oneCardData.set(await res.json());
-            console.log($oneCardData);
+            let data = await res.json()
+            oneCardData.set(data);
             page.set("home");
         }else{
             formError = true;

@@ -4,13 +4,17 @@ import { writable, type Writable } from "svelte/store";
 //obviously non-authenticated users can access any page through modifying local storage
 //but all they would see is empty data anyway so this is not a security risk.
 const storedPage = localStorage.getItem("activePage");
-export const page = writable(storedPage);
+export const page = writable(storedPage === "login" || storedPage === "home" ? storedPage : "login");
 page.subscribe(page => {
-    localStorage.setItem("activePage", page ? page : "login");
+    localStorage.setItem("activePage", page);
 })
 
 const storedOneCardData = localStorage.getItem("oneCardData");
-export const oneCardData:Writable<OneCardData> = writable(JSON.parse(storedOneCardData));
+let storedData: OneCardData = {Balances: null, Transactions: null}
+try{
+    storedData = JSON.parse(storedOneCardData)
+}catch(err){}
+export const oneCardData:Writable<OneCardData> = writable(storedData);
 oneCardData.subscribe(data =>{
     localStorage.setItem("oneCardData", JSON.stringify(data));
 })
@@ -18,17 +22,18 @@ oneCardData.subscribe(data =>{
 
 //user data from server
 interface Transaction{
-    location: String,
-    amount: Number,
+    Location: string,
+    Amount: Number,
+    Date: string,
 }
 interface OneCardData{
-    balances: {
-        standardMealPlan: Number,
-        plusMealPlan: Number,
-        flex: Number,
-    }
-    transactions: {
-        recent: Array<Transaction>
-        all: Array<Transaction>
-    }
+    Balances: {
+        StandardMealPlan: Number,
+        PlusMealPlan: Number,
+        Flex: Number,
+    } | null
+    Transactions: {
+        Recent: Array<Transaction>
+        All: Array<Transaction>
+    } | null
 }
