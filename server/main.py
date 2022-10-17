@@ -26,21 +26,28 @@ def data():
         # retrieve data
 
         response = s.get(URL, allow_redirects=True)
-        if response.status_code == 400:
+        if not response.ok:
             return jsonify(data), 400
 
         login_html = BeautifulSoup(response.text, features="html.parser")
         execution = login_html.find("input", {"name":"execution"})['value']
 
         response = s.post(URL,data={"username":content["username"], "password":content["password"], "execution": execution, "_eventId": "submit"})
-        if response.status_code == 400:
+        if not response.ok:
             return jsonify(data), 400
 
         
         response = s.get("https://www.uvic.ca/MyCard/account/summary")
-        if response.status_code == 400:
+        if not response.ok:
             return jsonify(data), 400
+       
         onecard_html = BeautifulSoup(response.text, features="html.parser")
+        try:
+            execution = onecard_html.find("input", {"name":"execution"})['value']
+            if execution:
+                return jsonify(data), 400
+        except TypeError:
+            pass
 
         balances = {}
         transactions = {}
