@@ -1,7 +1,9 @@
 <script>
 
     import Ring from "c:/Users/leona/Github repos/OneCard-Dashboard/web/src/components/Ring.svelte";
+    import RecentTransactions from "c:/Users/leona/Github repos/OneCard-Dashboard/web/src/components/RecentTransactions.svelte";
     import {oneCardData, page} from "../ts/store";
+    
     
     function logout(){
         page.set("login")        
@@ -13,7 +15,11 @@
 
     <input type="button" class="button logout-button" value="Logout" on:click={logout}>
     <div class="ring">
-        <Ring value_of_current={$oneCardData.balances.standardMealPlan} value_of_total=1291.75></Ring>
+        <Ring value_of_current={$oneCardData.balances.standardMealPlan} value_of_total=1291.75></Ring> 
+    </div>
+
+    <div class="recent-transactions">
+        <RecentTransactions></RecentTransactions>
     </div>
 </main>
 
@@ -21,6 +27,7 @@
     #title {
         display: flex;
         justify-content: center;
+        padding: 25px;
     }
 
     .ring {
@@ -38,7 +45,13 @@
     }
 
     .logout-button {
-        display: fixed;
+        position: absolute;
+        margin: 20px;
+    }
+
+    .recent-transactions {
+        display: flex;
+        justify-content: center;
     }
         
     
