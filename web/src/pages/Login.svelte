@@ -2,7 +2,7 @@
     import {oneCardData, page} from "../ts/store"
 
     async function login(event: SubmitEvent){
-        const formData = new FormData(event.target)
+        const formData = new FormData(event.target)  //ignore this error
         const serverURL = "http://127.0.0.1:5000";
         const res = await fetch(serverURL, {
             method: "POST",
