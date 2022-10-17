@@ -4,6 +4,7 @@
     let formError = false;
 
     async function login(event: SubmitEvent){
+        if($oneCardData) page.set("home");
         const formData = new FormData(event.target)
         const serverURL = "http://127.0.0.1:5000";
         const res = await fetch(serverURL, {
@@ -12,7 +13,6 @@
         })
         if(res.ok){
             oneCardData.set(await res.json());
-            console.log($oneCardData);
             page.set("home");
         }else{
             formError = true;
