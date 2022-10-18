@@ -18,7 +18,9 @@
     </div>
 
     <div class="recent-transactions">
-        <RecentTransactions></RecentTransactions>
+        {#each Array(3) as _, i}
+            <RecentTransactions index={i} ></RecentTransactions>
+        {/each}
     </div>
 </main>
 
@@ -45,7 +47,8 @@
 
     .logout-button {
         position: absolute;
-        margin: 20px;
+        margin: 25px;
+        top: 0;
     }
 
     .recent-transactions {
