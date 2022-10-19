@@ -25,7 +25,7 @@
                 speed: 350
             }
         },
-          height: window.innerHeight / 2,
+          height: window.innerHeight / 2.5,
           type: 'radialBar',
           
         },

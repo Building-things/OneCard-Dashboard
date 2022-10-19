@@ -22,9 +22,11 @@
     </div>
 
     <div class="recent-transactions">
-        {#each Array(3) as _, i}
-            <RecentTransactions index={i} ></RecentTransactions>
-        {/each}
+        <div>
+            {#each Array(3) as _, i}
+                <RecentTransactions index={i} ></RecentTransactions>
+            {/each}
+        </div>
     </div>
 </main>
 
@@ -46,7 +48,7 @@
     }
 
     main {
-        height: 100vh;
+        height: fit-content;
     }
 
     .logout-button {
@@ -58,6 +60,7 @@
     .recent-transactions {
         display: flex;
         justify-content: center;
+        margin: 10%;
     }
 
     .analytics {
