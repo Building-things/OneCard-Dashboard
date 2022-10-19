@@ -17,6 +17,10 @@
         <Ring value_of_current={$oneCardData.Balances?.StandardMealPlan} value_of_total=1291.75></Ring> 
     </div>
 
+    <div class='analytics'>
+        <p>Space for graph / data showing reccomended spending per day</p>
+    </div>
+
     <div class="recent-transactions">
         {#each Array(3) as _, i}
             <RecentTransactions index={i} ></RecentTransactions>
@@ -54,6 +58,16 @@
     .recent-transactions {
         display: flex;
         justify-content: center;
+    }
+
+    .analytics {
+        display: flex;
+        justify-content: center;
+        background-color: var(--background-accent-colour);
+        width: 80%;
+        height: 200px;
+        border-radius: 15px;
+        margin: 10%;
     }
         
     
