@@ -10,7 +10,7 @@ page.subscribe(page => {
 })
 
 const storedOneCardData = localStorage.getItem("oneCardData");
-let storedData: OneCardData = {Balances: null, Transactions: null}
+let storedData: OneCardData = {Balances: null, Transactions: null, Meta: null}
 try{
     storedData = JSON.parse(storedOneCardData)
 }catch(err){}
@@ -36,4 +36,7 @@ interface OneCardData{
         Recent: Array<Transaction>
         All: Array<Transaction>
     } | null
+    Meta: {
+        StandardTotal: number
+    }|null
 }

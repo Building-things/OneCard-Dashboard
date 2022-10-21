@@ -5,7 +5,6 @@
     import { onMount } from "svelte";
     
     let daily_budget = 0;
-    const meal_plan_total = 1291.75 //TODO replace with server call
     onMount(()=>{
         const current_date = new Date()
         const current_month = new Date().getMonth()
@@ -24,7 +23,7 @@
         
     })
     function logout(){
-        oneCardData.set({Balances: null, Transactions: null})
+        oneCardData.set({Balances: null, Transactions: null, Meta:null})
         page.set("login")        
     }
 </script>
@@ -32,11 +31,11 @@
 
 <main>
     <header>
-        <h1 id="title">OCD</h1>
+        <h1>OCD</h1>
         <button class="button" on:click={logout}>Logout</button>
     </header>
     <section id="balances">
-        <Ring value_of_current={$oneCardData.Balances?.StandardMealPlan} value_of_total={meal_plan_total}></Ring>
+        <Ring value_of_current={$oneCardData.Balances?.StandardMealPlan} value_of_total={$oneCardData.Meta?.StandardTotal}></Ring>
         <div>
             <p><b>Standard: </b></p>
             <b class="dollar-amount">${$oneCardData.Balances?.StandardMealPlan}</b>

@@ -25,9 +25,13 @@ type Transactions_T struct {
 	Recent []Transaction_T
 	All    []Transaction_T
 }
+type MetaData_T struct {
+	StandardTotal float64
+}
 type ONECardData struct {
 	Balances     Balances_T
 	Transactions Transactions_T
+	Meta         MetaData_T
 }
 
 func OneCardData(username string, password string) (ONECardData, bool) {
@@ -129,7 +133,8 @@ func OneCardData(username string, password string) (ONECardData, bool) {
 		t.Location = s.Find(".transaction-desc").Text()
 		data.Transactions.Recent = append(data.Transactions.Recent, t)
 	})
-
+	//TODO replace with server call or get from a cache.
+	data.Meta.StandardTotal = 1291.75
 	return data, true
 }
 
@@ -137,6 +142,7 @@ func TestData() ONECardData {
 	return ONECardData{
 		Balances:     Balances_T{StandardMealPlan: 100, Flex: 100, PlusMealPlan: 100},
 		Transactions: Transactions_T{Recent: make([]Transaction_T, 3), All: make([]Transaction_T, 10)},
+		Meta:         MetaData_T{StandardTotal: 1291.75},
 	}
 }
 
