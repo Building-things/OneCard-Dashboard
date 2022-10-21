@@ -17,7 +17,7 @@
         padding: 5% 5%;
         background-color: var(--background-main-colour);
         margin-bottom: 1vh;
-        border-left: 3px solid var(--accent-colour)
+        border-left: 4px solid var(--accent-colour)
     }
     #date{
         font-weight: bold;

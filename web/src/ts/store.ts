@@ -23,14 +23,14 @@ oneCardData.subscribe(data =>{
 //user data from server
 export interface Transaction{
     Location: string,
-    Amount: Number,
+    Amount: number,
     Date: string,
 }
 interface OneCardData{
     Balances: {
-        StandardMealPlan: Number,
-        PlusMealPlan: Number,
-        Flex: Number,
+        StandardMealPlan: number,
+        PlusMealPlan: number,
+        Flex: number,
     } | null
     Transactions: {
         Recent: Array<Transaction>

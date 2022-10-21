@@ -2,8 +2,27 @@
     import Ring from "../components/Ring.svelte";
     import {oneCardData, page} from "../ts/store";
     import Transaction from "../components/Transaction.svelte";
+    import { onMount } from "svelte";
     
-    
+    let daily_budget = 0;
+    const meal_plan_total = 1291.75 //TODO replace with server call
+    onMount(()=>{
+        const current_date = new Date()
+        const current_month = new Date().getMonth()
+        const current_year = new Date().getFullYear()
+        let term_end_date;
+        if(current_month > 6){
+            term_end_date = new Date(`December 20, ${current_year} 23:59:000`)
+        }else if(current_month < 5){
+            term_end_date = new Date(`April 29, ${current_year} 23:59:000`)
+        }else{
+            alert("Summer Term Not Supported");
+        }
+        const time_between = term_end_date.getTime() - current_date.getTime();
+        const time_between_days = Math.floor(time_between / (1000 * 60 * 60 * 24));
+        daily_budget = parseFloat(($oneCardData?.Balances?.StandardMealPlan / time_between_days).toFixed(2));
+        
+    })
     function logout(){
         oneCardData.set({Balances: null, Transactions: null})
         page.set("login")        
@@ -17,23 +36,23 @@
         <button class="button" on:click={logout}>Logout</button>
     </header>
     <section id="balances">
-        <Ring value_of_current={$oneCardData.Balances?.StandardMealPlan} value_of_total=1291.75></Ring>
+        <Ring value_of_current={$oneCardData.Balances?.StandardMealPlan} value_of_total={meal_plan_total}></Ring>
         <div>
-            <p><b>Standard: </b>$</p>
-            <p>{$oneCardData.Balances?.StandardMealPlan}</p>
+            <p><b>Standard: </b></p>
+            <b class="dollar-amount">${$oneCardData.Balances?.StandardMealPlan}</b>
         </div>
         <div>
-            <p><b>Plus: </b>$</p>
-            <p>{$oneCardData.Balances?.PlusMealPlan}</p>
+            <p><b>Plus: </b></p>
+            <b class="dollar-amount">${$oneCardData.Balances?.PlusMealPlan}</b>
         </div>
         <div>
-            <p><b>Flex: </b>$</p>
-            <p>{$oneCardData.Balances?.Flex}</p>
+            <p><b>Flex: </b></p>
+            <b class="dollar-amount">${$oneCardData.Balances?.Flex}</b>
         </div>
     </section>
 
     <section>
-        <p>Analytics</p>
+        <b>You Can Spend <b class="dollar-amount">${daily_budget}</b>/day</b>
     </section>
 
     <section id="transactions">
@@ -54,12 +73,13 @@
     }
     header{
         width: 100vw;
-        height: 5vh;
+        height: 8vh;
         display: flex;
         align-items: center;
         justify-content: space-between;
         box-sizing: border-box;
         padding: 5% 5%;
+        margin-bottom: 2vh;
     }   
 
     section{
@@ -69,7 +89,7 @@
         border-radius: 15px;
         box-sizing: border-box;
         padding: 5%;
-        margin-top: 5ch;
+        margin-bottom: 4vh;
     }
 
     #transactions{
@@ -84,11 +104,12 @@
         height: 30%;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
-        padding: 2% 0;
+        padding: 0 3%;
     }
     #balances > div{
         display: flex;
         align-items: center;
+        justify-content: flex-end;
         font-size: 16px;
         grid-column: 2;
     }

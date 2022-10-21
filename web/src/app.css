@@ -8,8 +8,8 @@
     font-family: sans-serif;
     --background-main-colour: #2a2a2c;
     --background-accent-colour: #333333;
-    --accent-colour: #e81c1c;
-    --accent-darker-colour: #c90909;
+    --accent-colour: #254dc8;
+    --accent-darker-colour: #1a429f;
 }
 
 /*default styling for all pages*/
@@ -22,12 +22,19 @@ main{
 /* class so all buttons feel the same */
 .button{
     font-size: 1rem;
-    padding: 5px;
+    padding: 8px;
     box-sizing: border-box;
     background-color: var(--accent-colour);
     border: none;
+    color: white;
+    border-radius: 2px;
+    font-size: 20px;
 }
 
 .button:hover{
     background-color: var(--accent-darker-colour);
+}
+
+.dollar-amount{
+    color: lime;
 }
