@@ -21,7 +21,7 @@ oneCardData.subscribe(data =>{
 
 
 //user data from server
-interface Transaction{
+export interface Transaction{
     Location: string,
     Amount: Number,
     Date: string,

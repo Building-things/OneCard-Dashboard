@@ -25,7 +25,7 @@
                 speed: 350
             }
         },
-          height: window.innerHeight / 2,
+          height: ((window.innerHeight) / 4),
           type: 'radialBar',
           
         },
@@ -42,12 +42,12 @@
                     show: true,
                     label: 'Balance: ',
                     
-                    formatter: function () { return value_of_current}
+                    formatter: function () { return `$${value_of_current}`}
                 },
                             
             },
             hollow: {
-              size: '70%',
+              size: '60%',
             }
           }
         },
@@ -56,7 +56,7 @@
         }
         };
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        let chart = new ApexCharts(document.querySelector("#chart"), options);
         
         chart.render();
     }
@@ -72,5 +72,7 @@
 <style>
     #chart{
         display: block;
+        grid-row: 1 / 4;
+        grid-column: 1;
     }
 </style>

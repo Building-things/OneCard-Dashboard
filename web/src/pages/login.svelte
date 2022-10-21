@@ -3,7 +3,7 @@
 
     let formError = false;
 
-    async function login(event: SubmitEvent){
+    async function login(event: any){
         //if this data is populated no need to log back in
         if($oneCardData?.Balances?.StandardMealPlan){
             page.set("home");

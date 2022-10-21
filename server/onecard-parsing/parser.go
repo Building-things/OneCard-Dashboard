@@ -134,7 +134,10 @@ func OneCardData(username string, password string) (ONECardData, bool) {
 }
 
 func TestData() ONECardData {
-	return ONECardData{Balances: Balances_T{StandardMealPlan: 100, Flex: 100, PlusMealPlan: 100}}
+	return ONECardData{
+		Balances:     Balances_T{StandardMealPlan: 100, Flex: 100, PlusMealPlan: 100},
+		Transactions: Transactions_T{Recent: make([]Transaction_T, 3), All: make([]Transaction_T, 10)},
+	}
 }
 
 // not my functions rounds the floats for me though
