@@ -2,6 +2,7 @@
     import Ring from "../components/Ring.svelte";
     import {oneCardData, page} from "../ts/store";
     import RecentTransactions from "../components/RecentTransactions.svelte";
+    import MoneyPerDay from "../components/MoneyPerDay.svelte";
     
     
     function logout(){
@@ -14,11 +15,12 @@
 
     <input type="button" class="button logout-button" value="Logout" on:click={logout}>
     <div class="ring">
-        <Ring value_of_current={$oneCardData.Balances?.StandardMealPlan} value_of_total=1291.75></Ring> 
+        <Ring value_of_current={$oneCardData.Balances?.StandardMealPlan} value_of_total=1291.75></Ring>
     </div>
 
     <div class='analytics'>
         <p>Space for graph / data showing reccomended spending per day</p>
+        <MoneyPerDay></MoneyPerDay>
     </div>
 
     <div class="recent-transactions">
@@ -71,6 +73,8 @@
         height: 200px;
         border-radius: 15px;
         margin: 10%;
+        flex-direction: column;
+        align-items: center;
     }
         
     
