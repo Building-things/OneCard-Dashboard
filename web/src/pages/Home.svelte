@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import Ring from "../components/Ring.svelte";
     import {oneCardData, page} from "../ts/store";
     import Transaction from "../components/Transaction.svelte";

@@ -10,6 +10,12 @@
             return;
         }
         const formData = new FormData(event.target) 
+        for(const val of formData.values()){
+            if(!val){
+                formError = true;
+                return;
+            }
+        }
         const serverURL = "http://127.0.0.1:5000";
         const res = await fetch(serverURL, {
             method: "POST",
