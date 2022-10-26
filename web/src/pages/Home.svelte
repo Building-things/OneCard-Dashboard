@@ -3,6 +3,7 @@
     import {oneCardData, page} from "../ts/store";
     import Transaction from "../components/Transaction.svelte";
     import { onMount } from "svelte";
+    import SpendingChart from "../components/SpendingChart.svelte"
     
     let daily_budget = 0;
     onMount(()=>{
@@ -50,16 +51,18 @@
         </div>
     </section>
 
-    <section>
+    <section id="analytics">
         <b>You Can Spend <b class="dollar-amount">${daily_budget}</b>/day</b>
+        <SpendingChart></SpendingChart>
     </section>
 
     <section id="transactions">
         {#if $oneCardData?.Transactions}
-            {#each $oneCardData?.Transactions?.Recent.splice(0, 3) as t}
+            {#each $oneCardData?.Transactions?.Recent as t}
                 <Transaction transaction={t}></Transaction>
             {/each}
         {/if}
+        <button class="button" style="width: 100%">Load More</button>
     </section>
 </main>
 
@@ -68,7 +71,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        min-height: 100vh;
+        max-height: 100vh;
     }
     header{
         width: 100vw;
@@ -94,8 +97,10 @@
     #transactions{
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
+        overflow-y: scroll;
+        max-height: 100%;
     }
 
     #balances{
@@ -112,7 +117,11 @@
         font-size: 16px;
         grid-column: 2;
     }
-    
+    #analytics{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 </style>
 
 
