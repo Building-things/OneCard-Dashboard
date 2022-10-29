@@ -1,7 +1,6 @@
 package onecardparsing
 
 import (
-	"math"
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
@@ -144,14 +143,4 @@ func TestData() ONECardData {
 		Transactions: Transactions_T{Recent: make([]Transaction_T, 3), All: make([]Transaction_T, 10)},
 		Meta:         MetaData_T{StandardTotal: 1291.75},
 	}
-}
-
-// not my functions rounds the floats for me though
-func amount_round(num float64, precision int) float64 {
-	output := math.Pow(10, float64(precision))
-	return float64(round(num*output)) / output
-}
-
-func round(num float64) int {
-	return int(num + math.Copysign(0.5, num))
 }
