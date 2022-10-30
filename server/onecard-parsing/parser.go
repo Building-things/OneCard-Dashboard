@@ -6,6 +6,7 @@ import (
 	"net/url"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/PuerkitoBio/goquery"
 )
@@ -96,8 +97,39 @@ func OneCardData(username string, password string) (ONECardData, bool) {
 		return ONECardData{}, false
 	}
 
-	data := ONECardData{}
+	var wg sync.WaitGroup
+	wg.Add(3)
+	balances_chan := make(chan Balances_T)
+	transactions_chan := make(chan Transactions_T)
+	meta_chan := make(chan MetaData_T)
+
 	//parse balances
+	go getBalances(doc, &wg, balances_chan)
+
+	//find recent transactions
+	go getTransactions(doc, &wg, transactions_chan)
+
+	//get some meta deta about the meal plan (term dates, total ect.)
+	go getMeta(&wg, meta_chan)
+
+	data := ONECardData{Balances: <-balances_chan, Transactions: <-transactions_chan, Meta: <-meta_chan}
+
+	wg.Wait()
+	return data, true
+}
+
+func TestData() ONECardData {
+	return ONECardData{
+		Balances:     Balances_T{StandardMealPlan: 100, Flex: 100, PlusMealPlan: 100},
+		Transactions: Transactions_T{Recent: make([]Transaction_T, 3), All: make([]Transaction_T, 10)},
+		Meta:         MetaData_T{StandardTotal: 1291.75},
+	}
+}
+
+func getBalances(doc *goquery.Document, wg *sync.WaitGroup, c chan Balances_T) {
+	defer wg.Done()
+
+	data := Balances_T{}
 	doc.Find(".summary.transactions > ul > li > .transaction-amt").Each(func(i int, s *goquery.Selection) {
 		amt_string := strings.Split(s.Text(), "$")[1]
 		amt, err := strconv.ParseFloat(amt_string, 32)
@@ -108,16 +140,21 @@ func OneCardData(username string, password string) (ONECardData, bool) {
 
 		switch i {
 		case 0:
-			data.Balances.StandardMealPlan = amt
+			data.StandardMealPlan = amt
 		case 1:
-			data.Balances.PlusMealPlan = amt
+			data.PlusMealPlan = amt
 		case 2:
-			data.Balances.Flex = amt
+			data.Flex = amt
 		}
 
 	})
+	c <- data
+}
 
-	//find recent transactions
+func getTransactions(doc *goquery.Document, wg *sync.WaitGroup, c chan Transactions_T) {
+	defer wg.Done()
+
+	data := Transactions_T{}
 	doc.Find(".transactions").Not(".summary").Find("li").Each(func(i int, s *goquery.Selection) {
 		amt_string := strings.Split(s.Find(".transaction-amt").Text(), "$")[1]
 		amt, err := strconv.ParseFloat(amt_string, 32)
@@ -130,17 +167,12 @@ func OneCardData(username string, password string) (ONECardData, bool) {
 		t.Amount = amt
 		t.Date = s.Find(".transaction-date").Text()
 		t.Location = s.Find(".transaction-desc").Text()
-		data.Transactions.Recent = append(data.Transactions.Recent, t)
+		data.Recent = append(data.Recent, t)
 	})
-	//TODO replace with server call or get from a cache.
-	data.Meta.StandardTotal = 1291.75
-	return data, true
+	c <- data
 }
 
-func TestData() ONECardData {
-	return ONECardData{
-		Balances:     Balances_T{StandardMealPlan: 100, Flex: 100, PlusMealPlan: 100},
-		Transactions: Transactions_T{Recent: make([]Transaction_T, 3), All: make([]Transaction_T, 10)},
-		Meta:         MetaData_T{StandardTotal: 1291.75},
-	}
+func getMeta(wg *sync.WaitGroup, c chan MetaData_T) {
+	defer wg.Done()
+	c <- MetaData_T{StandardTotal: 1291.75}
 }
