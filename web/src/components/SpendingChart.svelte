@@ -5,18 +5,16 @@
 
     function createSpendingChart(){
         //for some reason array map didnt work :( no clue why.
-        const amounts:Array<number> = [];
-        $oneCardData?.Transactions?.Recent.forEach(v => {
-            amounts.push(v.Amount)
-            
-        })
-        const xaxis:Array<string> = [];
-        $oneCardData?.Transactions?.Recent.forEach(v => {
-            xaxis.push(v.Date)
-            
-        })
-        //console.log(amounts, xaxis);
         
+        const spent_per_day = {};
+        const days_to_show = 7;
+        $oneCardData?.Transactions?.All.forEach(v => {
+            if(!spent_per_day[v.Date]) spent_per_day[v.Date] = 0;
+            spent_per_day[v.Date] += v.Amount.toFixed(1)
+            if(Object.keys(spent_per_day).length >= days_to_show) return
+            
+        })
+
         const options = {
             chart: {
                 type: 'bar'
@@ -24,11 +22,11 @@
             series: [
             {
                 name: 'spending',
-                data: amounts,
+                data: Object.values(spent_per_day),
             }
             ],
             xaxis: {
-                categories: xaxis,
+                categories: Object.keys(spent_per_day),
                 labels:{
                     style: {
                         colors: "white",
