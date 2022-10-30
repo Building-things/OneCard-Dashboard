@@ -11,7 +11,7 @@
         $oneCardData?.Transactions?.All.forEach(v => {
             if(!spent_per_day[v.Date]) spent_per_day[v.Date] = 0;
             spent_per_day[v.Date] += v.Amount.toFixed(1)
-            if(Object.keys(spent_per_day).length >= days_to_show) return
+            if(Object.keys(spent_per_day).length >= days_to_show) return;
             
         })
 

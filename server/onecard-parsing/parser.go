@@ -169,6 +169,7 @@ func getTransactions(doc *goquery.Document, wg *sync.WaitGroup, c chan Transacti
 		t.Location = s.Find(".transaction-desc").Text()
 		data.Recent = append(data.Recent, t)
 	})
+	data.All = data.Recent
 	c <- data
 }
 

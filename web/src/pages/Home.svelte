@@ -4,6 +4,8 @@
     import Transaction from "../components/Transaction.svelte";
     import { onMount } from "svelte";
     import SpendingChart from "../components/SpendingChart.svelte"
+
+    let showMoreTransactions = false;
     
     let daily_budget = 0;
     onMount(()=>{
@@ -61,8 +63,14 @@
             {#each $oneCardData?.Transactions?.Recent as t}
                 <Transaction transaction={t}></Transaction>
             {/each}
+            {#if showMoreTransactions}
+                {#each $oneCardData?.Transactions?.All as t}
+                    <Transaction transaction={t}></Transaction>
+                {/each}
+            {/if}
         {/if}
-        <button class="button" style="width: 100%">Load More</button>
+        <button class="button" style="width: 100%" on:click={()=>{showMoreTransactions = true}}>Load More</button>
+
     </section>
 </main>
 
