@@ -17,7 +17,8 @@
 
         const options = {
             chart: {
-                type: 'bar'
+                type: 'bar',
+                toolbar: 'false'
             },
             series: [
             {
@@ -45,6 +46,7 @@
             fill: {
                 colors: 'var(--accent-colour)'
             }
+
         };
 
         let chart = new ApexCharts(document.querySelector("#chart2"), options);
