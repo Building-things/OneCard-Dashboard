@@ -2,21 +2,18 @@ package main
 
 import (
 	onecardparsing "onecard-dashboard/onecard-parsing"
-	"os"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
-	port := os.Getenv("PORT")
-
 	app := fiber.New()
 
 	app.Static("/", "./dist")
 
 	app.Post("/", Root)
 
-	app.Listen(":" + port)
+	app.Listen(":5000")
 }
 
 func Root(c *fiber.Ctx) error {
