@@ -1,9 +1,6 @@
 package onecardparsing
 
 import (
-	"net/http"
-	"net/http/cookiejar"
-	"net/url"
 	"strconv"
 	"strings"
 	"sync"
@@ -35,65 +32,23 @@ type ONECardData struct {
 }
 
 func OneCardData(username string, password string) (ONECardData, bool) {
-	LOGIN_URL := "https://www.uvic.ca/cas/login?service=https%3A%2F%2Fwww.uvic.ca%2Ftools%2Findex.php"
+	//creates a client with authenticated cookies
+	client, ok := createAuthenticatedClient(username, password)
+	if !ok {
+		return ONECardData{}, false
+	}
+
 	ONECARD_URL := "https://www.uvic.ca/MyCard/account/summary"
 
-	//create cookie jar
-	jar, err := cookiejar.New(nil)
-	if err != nil {
-		return ONECardData{}, false
-	}
-
-	//make our client for the http requests
-	client := &http.Client{
-		Jar: jar,
-	}
-
-	//get the login url to set up some cookies
-	resp, err := client.Get(LOGIN_URL)
-	if err != nil {
-		return ONECardData{}, false
-	}
-
-	//find our execution string to send with the username and password
-	doc, doc_err := goquery.NewDocumentFromReader(resp.Body)
-	if doc_err != nil {
-		return ONECardData{}, false
-	}
-	execution, exists := doc.Find("input[name='execution']").Attr("value")
-	if !exists {
-		return ONECardData{}, false
-	}
-
-	//send the login request
-	_, err = client.PostForm(LOGIN_URL,
-		url.Values{
-			"username":  {username},
-			"password":  {password},
-			"execution": {execution},
-			"_eventId":  {"submit"},
-		},
-	)
-	if err != nil {
-		return ONECardData{}, false
-	}
-
 	//get onecard page
-	resp, err = client.Get(ONECARD_URL)
+	resp, err := client.Get(ONECARD_URL)
 	if err != nil {
 		return ONECardData{}, false
 	}
 
 	//parse user data from the onecard page
-	doc, doc_err = goquery.NewDocumentFromReader(resp.Body)
+	doc, doc_err := goquery.NewDocumentFromReader(resp.Body)
 	if doc_err != nil {
-		return ONECardData{}, false
-	}
-
-	//since UVIC returns 200 even on failed login we have to see if we are still on the login page
-	//if this exists we are on thus the login failed
-	_, exists = doc.Find("input[name='execution']").Attr("value")
-	if exists {
 		return ONECardData{}, false
 	}
 
