@@ -69,7 +69,7 @@
                 {/each}
             {/if}
         {/if}
-        <button class="button" style="width: 100%" on:click={()=>{showMoreTransactions = true}}>Load More</button>
+        <!--<button class="button" style="width: 100%" on:click={()=>{showMoreTransactions = true}}>Load More</button> -->
 
     </section>
 </main>

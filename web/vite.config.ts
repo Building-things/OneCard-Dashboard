@@ -31,8 +31,8 @@ export default defineConfig({
   ],
   server: {
     host: false,
-  },
-  build: {
-    outDir: "../server/dist"
   }
+  // build: {
+  //   outDir: "../server/dist"
+  // }
 })
