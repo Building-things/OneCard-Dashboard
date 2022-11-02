@@ -16,7 +16,7 @@
                 return;
             }
         }
-        const serverURL = "http://127.0.0.1:5000";
+        const serverURL = window.location.href;
         const res = await fetch(serverURL, {
             method: "POST",
             body: formData,
