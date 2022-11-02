@@ -79,7 +79,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        max-height: 100vh;
+        height: fit-content;
     }
     header{
         width: 100vw;

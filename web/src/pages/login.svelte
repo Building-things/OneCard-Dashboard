@@ -40,11 +40,11 @@
         <form class="flex-column" on:submit|preventDefault={login}>
             <div>
                 <label for="username">NetlinkID</label>
-                <input name="username">
+                <input name="username" autocorrect="off" autocapitalize="none">
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="password" name="password">
+                <input type="password" name="password" autocorrect="off" autocapitalize="none">
             </div>
             <button class="button" type="submit">Submit</button>
             <div class="{formError ? "" : "hidden"} error">

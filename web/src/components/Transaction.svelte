@@ -6,7 +6,7 @@
 
 <div>
     <p id="date">{transaction.Date}</p>
-    <p id="amount" style="color:lime; font-weight:bold">${transaction.Amount}</p>
+    <p id="amount" style="color:lime; font-weight:bold">${transaction.Amount.toFixed(2)}</p>
     <p id="location">{transaction.Location}</p>
 </div>
 
