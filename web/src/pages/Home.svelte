@@ -69,7 +69,7 @@
                 {/each}
             {/if}
         {/if}
-        <!--<button class="button" style="width: 100%" on:click={()=>{showMoreTransactions = true}}>Load More</button> -->
+        <!--<button class="button" style="width: 100%" on:clickshowMo={()=>{reTransactions = true}}>Load More</button> -->
 
     </section>
 </main>
@@ -107,8 +107,9 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        overflow-y: scroll;
         max-height: 100%;
+        overflow-y: overlay;
+
     }
 
     #balances{
@@ -130,6 +131,8 @@
         flex-direction: column;
         align-items: center;
     }
+
+
 </style>
 
 

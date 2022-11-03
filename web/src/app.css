@@ -17,6 +17,8 @@ main{
     color: white;
     background-color: var(--background-main-colour);
     width: 100vw;
+    overflow-x: hidden;
+    
 }
 
 /* class so all buttons feel the same */
@@ -37,4 +39,10 @@ main{
 
 .dollar-amount{
     color: lime;
+}
+
+@media (width >= 900px) {
+    main{
+        width: 100%
+    }
 }

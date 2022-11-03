@@ -9,8 +9,8 @@
         const spent_per_day = {};
         const days_to_show = 7;
         $oneCardData?.Transactions?.All.forEach(v => {
-            if(!spent_per_day[v.Date]) spent_per_day[v.Date] = v.Amount.toFixed(1);
-            spent_per_day[v.Date] += v.Amount.toFixed(1)
+            if(!spent_per_day[v.Date]) spent_per_day[v.Date] = parseFloat(v.Amount.toFixed(2));
+            spent_per_day[v.Date] += parseFloat(v.Amount.toFixed(2))
             if(Object.keys(spent_per_day).length >= days_to_show) return;
             
         })
