@@ -1,0 +1,50 @@
+.top-decor{
+    position: absolute;
+    top: 0;
+    transform: rotate(180deg);
+}
+
+.bottom-decor{
+    position: absolute;
+    bottom: 0;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#loginBox{
+    height: 50%;
+    width: 75%;
+    text-align: center;
+}
+h2{
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+form > input{
+    margin-top: 16px;
+    font-size: 16px;
+    padding: 5px;
+    width: 80%;
+    outline: none;
+    border-bottom: 2px solid var(--background-accent-color);
+    background-color: var(--background-color);
+    transition: border 1s;
+    color: white;
+}
+
+form > input:not([type=submit]):focus{
+    border-bottom: 2px solid var(--accent-color);
+}

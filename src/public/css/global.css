@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+:root{
+    --background-color: #050b33;
+    --background-accent-color: #1a1f3e; 
+    --accent-color: #0099ff;
+    --accent-dark: #006fb9;
+}
+
+
+
+body{
+    width: 100vw;
+    background-color: var(--background-color);
+    color: white;
+    font-family: sans-serif;
+}
+
+.container{
+    background-color: var(--background-accent-color);
+    box-sizing: border-box;
+    padding: 5%;
+}
+
+.btn{
+    background-color: #0099ff;
+    color: white;
+    padding: 5px;
+    transition: background-color 1s;
+}
+
+.btn:hover{
+    background-color: var(--accent-dark);
+}
