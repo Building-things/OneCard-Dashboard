@@ -1,6 +1,7 @@
 package main
 
 import (
+	uvicapi "ONECard-Dashboard/uvic-api"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -19,6 +20,8 @@ func main() {
 	http.HandleFunc("/", login)
 	http.HandleFunc("/home", home)
 
+	fmt.Println("Server Running On Port 5000")
+	fmt.Println("	http://localhost:5000/")
 	http.ListenAndServe(":5000", nil)
 }
 
@@ -28,7 +31,26 @@ func login(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		loginTemplate.Execute(w, nil)
 	case "POST":
-		w.Write([]byte("...pretending to login"))
+		//populate form data with form values from request
+		err := r.ParseForm()
+		if err != nil {
+			http.Redirect(w, r, "/?err=formParseError", 302)
+			return
+		}
+
+		//make sure the posted data has the correct format
+		if !r.Form.Has("username") || !r.Form.Has("password") {
+			http.Redirect(w, r, "/?err=formWrongKeys", 302)
+			return
+		}
+
+		//create an athenticated uvic client
+		_, ok := uvicapi.CreateAuthenticatedClient(r.Form.Get("username"), r.Form.Get("password"))
+
+		if !ok {
+			http.Redirect(w, r, "/?err=InvalidCredentials", 302)
+			return
+		}
 		//create object with our home template data from login
 		http.Redirect(w, r, "/home", 302)
 	default:
