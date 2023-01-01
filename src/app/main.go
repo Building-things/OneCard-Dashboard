@@ -33,7 +33,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 func home(w http.ResponseWriter, r *http.Request) {
 	log(r)
 
-	renderData := uvicapi.ONECardData{}
+	renderData := uvicapi.TestData()
 
 	if r.Method == "POST" {
 		//populate form data with form values from request

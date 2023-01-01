@@ -1,0 +1,46 @@
+.container{
+    width: 85%;
+    margin-bottom: 16px;
+}
+h1{
+    margin: 24px 0;
+}
+
+p, #balances{
+    font-size: 1.1rem;
+}
+
+.column-flex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#balances{
+    display: grid;
+    grid-template-columns: 55% 45%;
+    grid-template-rows: 1fr 1fr 1fr;
+    padding: 0 !important
+}
+.balance-item{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+#balances > #chart{
+    grid-row: 1 / 4;
+}
+
+#transaction{
+    width: 90%;
+    background-color: var(--background-color);
+    border-left: 3px solid var(--accent-color);
+    margin-top: 16px;
+    box-sizing: border-box;
+    padding: 3%;
+}
+
+#chart{
+    margin: 0 auto;
+}

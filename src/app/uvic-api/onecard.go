@@ -12,16 +12,14 @@ type Transaction_T struct {
 	Amount   float64
 	Date     string
 }
-type Transactions_T struct {
-	Recent []Transaction_T
-	All    []Transaction_T
-}
+
 type MetaData_T struct {
 	StandardTotal float64
+	Name          string
 }
 type ONECardData struct {
 	Balances     Balances_T
-	Transactions Transactions_T
+	Transactions []Transaction_T
 	Meta         MetaData_T
 }
 
@@ -30,9 +28,14 @@ func GetOneCardData(c *http.Client) ONECardData {
 }
 
 func TestData() ONECardData {
+	transactions := []Transaction_T{
+		{Location: "Sydney", Amount: 123.0, Date: "1836 2731 2743"},
+		{Location: "Berlin", Amount: 123.0, Date: "1836 2731 2743"},
+		{Location: "Victoria", Amount: 123.0, Date: "1836 2731 2743"},
+	}
 	return ONECardData{
 		Balances:     Balances_T{StandardMealPlan: 100, Flex: 100, PlusMealPlan: 100},
-		Transactions: Transactions_T{Recent: make([]Transaction_T, 3), All: make([]Transaction_T, 10)},
+		Transactions: transactions,
 		Meta:         MetaData_T{StandardTotal: 1291.75},
 	}
 }
