@@ -10,7 +10,7 @@
     <title>OneCard-Dashboard</title>
 </head>
 <body class="column-flex">
-    <h1>OneCard Dashboard</h1>
+    <h1>Welcome {{.Meta.Name}}</h1>
     <section class="container" id="balances">
         <div id="chart">
         </div>
@@ -29,8 +29,12 @@
         {{range $transaction := .Transactions}}
             <div id="transaction">
                 <p id="transactionDate">{{$transaction.Date}}</p>
-                <p id="transactionAmount" style="color:lime">${{$transaction.Amount}}</p>
-                <p><i id="transactionLocation">{{$transaction.Location}}</i></p>    
+                {{if $transaction.Credit}}
+                    <p id="transactionAmount" style="color:lime ; font-weight: bold;">{{$transaction.Amount}}</p>
+                {{else}}
+                    <p id="transactionAmount" style="color:rgb(192, 15, 15); font-weight: bold;">{{$transaction.Amount}}</p>
+                {{end}}
+                <p><i id="transactionLocation">{{$transaction.Location}}</i></p> 
             </div>
         {{end}}
     </section>
