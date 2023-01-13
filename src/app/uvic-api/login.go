@@ -34,7 +34,6 @@ func CreateAuthenticatedClient(username string, password string) (*http.Client, 
 	if !found {
 		return nil, false
 	}
-
 	//send the login request
 	resp, err = client.PostForm(LOGIN_URL,
 		url.Values{
@@ -44,16 +43,13 @@ func CreateAuthenticatedClient(username string, password string) (*http.Client, 
 			"_eventId":  {"submit"},
 		},
 	)
-
 	if err != nil {
 		return nil, false
 	}
-
 	//uvic may return ok status code even with failed login this way we can check if we entered the protected page
 	if resp.Request.URL.String() != "https://www.uvic.ca/tools/index.php" {
 		return nil, false
 	}
-
 	return client, true
 }
 

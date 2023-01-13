@@ -34,7 +34,6 @@ type ONECardData struct {
 
 func GetOneCardData(c *http.Client) ONECardData {
 	ONECARD_URL := "https://www.uvic.ca/MyCard/account/summary"
-
 	//get onecard page
 	resp, err := c.Get(ONECARD_URL)
 	if err != nil {
