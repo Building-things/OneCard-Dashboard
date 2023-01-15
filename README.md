@@ -1,5 +1,7 @@
 # OneCard-Dashboard
 Displays UVic OneCard data nicely with some added data visualization.
+
+## Usage
 This project is not meant for the general uvic student base at this time as we are in beta testing.
 please contact us if you wish to join the beta.
 
@@ -11,4 +13,3 @@ before sending it back to you. Usernames and passwords are never stored they are
 If you reload the page you will automatically be logged in again, we reccomend not reloading the page
 too frequently as it risks your account being flagged for suspicous activity.
 If you have security concerns please contact us.
-
