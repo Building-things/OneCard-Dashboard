@@ -1,46 +1,65 @@
-.container{
-    width: 85%;
-    margin-bottom: 16px;
-}
-h1{
-    margin: 24px 0;
+body{
+    font-size: 40px;
 }
 
-p, #balances{
-    font-size: 1.1rem;
+header{
+    background-color: var(--accent-color);
+    box-sizing: border-box;
+    padding: 2%;
 }
 
-.column-flex{
+.content{
+    display: flex;
+    width: 100vw;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+.content > div{
+    margin-top: 4vw;
+    background-color: var(--background-accent-color);
+    width: 80%;
+    box-sizing: border-box;
+    padding: 5%;
+}
+.content > div > section > h3{
+    display: none;
+}
+ul{
+    list-style-type: none;
+}
+
+div.column-right > section > ul{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
 }
 
-#balances{
-    display: grid;
-    grid-template-columns: 55% 45%;
-    grid-template-rows: 1fr 1fr 1fr;
-    padding: 0 !important
-}
-.balance-item{
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-#balances > #chart{
-    grid-row: 1 / 4;
-}
-
-#transaction{
-    width: 90%;
+div.column-right > section > ul > li{
+    display: block;
     background-color: var(--background-color);
-    border-left: 3px solid var(--accent-color);
-    margin-top: 16px;
+    border-left: 2px solid var(--accent-color);
+    width: 100%;
     box-sizing: border-box;
-    padding: 3%;
+    padding: 2%;
+    margin-top: 4%;
+
 }
 
-#chart{
-    margin: 0 auto;
+.transaction-amt, .transaction-date, .transaction-desc{
+    display: block;
+    width: 100%;
+}
+
+div.column-left{
+    flex-direction: row-reverse;
+    display: flex;
+    height: 100%;
+}
+
+div.column-left > section{
+    height: 100%;
+}
+
+div.column-left > :not(.summary_transctions){
+    width: 60%
 }
