@@ -48,6 +48,19 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		isBetaUser := false
+		for _, val := range betaUsers {
+			if r.Form.Get("username") == val {
+				isBetaUser = true
+				break
+			}
+		}
+
+		if !isBetaUser {
+			http.Redirect(w, r, "/static/login.html/?err=nonBetaUser", http.StatusFound)
+			return
+		}
+
 		//create an athenticated uvic client
 		client, ok := uvicapi.CreateAuthenticatedClient(r.Form.Get("username"), r.Form.Get("password"))
 		if !ok {
