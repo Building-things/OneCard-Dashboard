@@ -1,0 +1,65 @@
+body{
+    font-size: 40px;
+}
+
+header{
+    background-color: var(--accent-color);
+    box-sizing: border-box;
+    padding: 2%;
+}
+
+.content{
+    display: flex;
+    width: 100vw;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+.content > div{
+    margin-top: 4vw;
+    background-color: var(--background-accent-color);
+    width: 80%;
+    box-sizing: border-box;
+    padding: 5%;
+}
+.content > div > section > h3{
+    display: none;
+}
+ul{
+    list-style-type: none;
+}
+
+div.column-right > section > ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.column-right > section > ul > li{
+    display: block;
+    background-color: var(--background-color);
+    border-left: 2px solid var(--accent-color);
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2%;
+    margin-top: 4%;
+
+}
+
+.transaction-amt, .transaction-date, .transaction-desc{
+    display: block;
+    width: 100%;
+}
+
+div.column-left{
+    flex-direction: row-reverse;
+    display: flex;
+    height: 100%;
+}
+
+div.column-left > section{
+    height: 100%;
+}
+
+div.column-left > :not(.summary_transctions){
+    width: 60%
+}

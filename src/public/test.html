@@ -1,0 +1,140 @@
+<html><head></head><body><div class="tabs onecard-tabcontent">
+
+  
+
+    <header class="clear-fix">
+        <div>
+            <p>Welcome,</p>
+    
+            <p>Rowan Apps - V01010380</p>
+        </div>
+        
+        <div class="quick-link-container">
+            <a id="addfundslink" href="/MyCard/account/addfunds" class="quick-link"><span class="quick-link-icon quick-link-content"><i class="fa fa-money fa-3x mobile"></i></span><span class="quick-link-content  quick-link-content--bottom">Add funds</span></a>
+            <a href="https://www.uvic.ca/onecard/how-do-i/use-my-card/" class="quick-link"><span class="quick-link-icon quick-link-content "><i class="fa fa-search fa-3x mobile"></i></span><span class="quick-link-content  quick-link-content--bottom">Where to use</span></a>
+            <a id="lostcardlink" href="/MyCard/card/deactivate/" class="quick-link"><span class="quick-link-icon quick-link-content"><i class="fa fa-id-card fa-3x mobile"></i></span><span class="quick-link-content quick-link-content--bottom">Freeze card</span></a>
+            <a href="http://www.uvic.ca/onecard/manage-card/faq/index.php" class="quick-link"><span class="quick-link-icon quick-link-content"><i class="fa fa-question-circle-o fa-3x mobile"></i>
+            </span><span class="quick-link-content quick-link-content--bottom">Get help</span></a>
+        </div>
+    </header>
+    
+    <!--
+          We are only showing the photo submission section if the user does not have a final photo (finalPhoto means the photo is approved through the app or it was taken at the card office).
+          However, if the photo was denied, but they have a final photo, it means they tried submitting through the app, were denied and then went to the card office to get their photo taken. 
+          If they have a final photo and their review status was not denied, then we will show the user a message saying they can pick up their card. This will only show for 7 days after the photo was approved.
+        -->
+    
+    
+    <section class="content">
+        <div class="column-right">
+            
+            <section class="transactions">
+                <h3>Recent activity</h3>
+            
+                
+                    <ul>
+                        
+                            <li>
+                                <span class="transaction-date">Jan 14, 2023</span>
+                                <span class="transaction-desc">Servery</span>
+                                <span class="transaction-amt debit">$4.93</span>
+                            </li>
+                        
+                            <li>
+                                <span class="transaction-date">Jan 14, 2023</span>
+                                <span class="transaction-desc">Servery</span>
+                                <span class="transaction-amt debit">$3.50</span>
+                            </li>
+                        
+                            <li>
+                                <span class="transaction-date">Jan 14, 2023</span>
+                                <span class="transaction-desc">Servery</span>
+                                <span class="transaction-amt debit">$2.85</span>
+                            </li>
+                        
+                            <li>
+                                <span class="transaction-date">Jan 13, 2023</span>
+                                <span class="transaction-desc">Servery</span>
+                                <span class="transaction-amt debit">$9.72</span>
+                            </li>
+                        
+                            <li>
+                                <span class="transaction-date">Jan 13, 2023</span>
+                                <span class="transaction-desc">Servery</span>
+                                <span class="transaction-amt debit">$3.75</span>
+                            </li>
+                        
+                    </ul>
+                    <a id="historybutton" href="/MyCard/account/history">See more activity</a>
+                
+            </section>
+        </div>
+    
+        <div class="column-left">
+            
+            <section class="summary transactions">
+                <h3>Balances</h3>
+                <ul>
+                
+                    
+                        <li><span class="transaction-desc">Residence Meal Plan</span> <span class=" transaction-amt">$1,205.63</span></li>
+                    
+                        <li><span class="transaction-desc">Plus Meal Plan</span> <span class=" transaction-amt">$0.91</span></li>
+                    
+                        <li><span class="transaction-desc">ONECard Flex</span> <span class=" transaction-amt">$38.55</span></li>
+                    
+                </ul>
+                <a class="sibiling-anchors--margin" id="addfundsbutton" href="/MyCard/account/addfunds"><i class="fa fa-plus-circle fa-lg fa-fw"></i>Add funds</a>
+                <a class="sibiling-anchors--margin " href="https://www.uvic.ca/onecard/manage-card/addfunds/giftdeposit/index.php"><i class="fa fa-gift fa-lg fa-fw"></i>Gift funds</a>
+            </section>
+            <section class="summary">
+            
+            
+                
+                    
+                        <h3>Passes</h3>
+                        <ul><li>U-Pass (BC Transit) valid until: <strong>April 30, 2023</strong></li></ul>
+                        
+                            <p>The U-Pass on your ONECard cannot be extended until you are registered for classes in a future term.</p>
+                        
+                    
+                
+                <a href="https://www.uvic.ca/onecard/how-do-i/use-for-transit/index.php">How to activate your U-Pass</a>
+            </section>
+        </div>
+    </section>
+    
+    
+    <script type="text/javascript">
+    
+        $(document).ready(function () {
+            $("#addfundsbutton").click(function () {
+                $("#onecard-addfunds").click();
+                return false;
+            });
+            $("#addfundslink").click(function () {
+                $("#onecard-addfunds").click();
+                return false;
+            });
+    
+            $("#lostcardlink").click(function () {
+                $("#onecard-deactivate").click();
+                return false;
+            });
+    
+            $("#historybutton").click(function () {
+                $("#onecard-history").click();
+                return false;
+            });
+        });
+    
+    </script>
+    <script defer src = "/js/app.js"></script>
+    <r:layoutresources>
+    
+    
+        
+    </r:layoutresources></div>
+    
+    
+    <r:layoutresources></r:layoutresources></body></html>

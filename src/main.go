@@ -3,13 +3,16 @@ package main
 import (
 	uvicapi "ONECard-Dashboard/uvic"
 	"fmt"
-	"io"
 	"net/http"
+	"strings"
+
+	"golang.org/x/net/html"
 )
 
 const ONECARD_URL string = "https://www.uvic.ca/MyCard/account/summary"
 
 func main() {
+
 	//setup static file server
 	fs := http.FileServer(http.Dir("./public"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
@@ -30,7 +33,8 @@ func main() {
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	log(r)
-	if r.Method == "POST" {
+	testing := true
+	if r.Method == "POST" && !testing {
 		//populate form data with form values from request
 		err := r.ParseForm()
 		if err != nil {
@@ -58,14 +62,34 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		//convert the response to bytes
-		body, err := io.ReadAll(resp.Body)
+		// body, err := io.ReadAll(resp.Body)
+		// if err != nil {
+		// 	http.Redirect(w, r, "/static/login.html/?err=MalformedResponseBytes", http.StatusFound)
+		// 	return
+		// }
+
+		parser, err := html.Parse(resp.Body)
 		if err != nil {
 			http.Redirect(w, r, "/static/login.html/?err=MalformedResponseBytes", http.StatusFound)
 			return
 		}
 
-		//write the html
-		w.Write(body)
+		//inject our script tag into the response html so we can take over on the client side
+		injected_script_tag_string := "<script defer src=\"/static/js/app.js\">"
+		reader := strings.NewReader(injected_script_tag_string)
+		parser_2, err := html.Parse(reader)
+		if err != nil {
+			http.Redirect(w, r, "/static/login.html/?err=MalformedPayloadBytes", http.StatusFound)
+			return
+		}
+
+		//add our script tag to the original response
+		parser.AppendChild(parser_2)
+
+		//render the new html
+		html.Render(w, parser)
+	} else {
+		http.Redirect(w, r, "/static/test.html", http.StatusPermanentRedirect)
 	}
 }
 
