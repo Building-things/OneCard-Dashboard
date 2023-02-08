@@ -32,8 +32,9 @@ func main() {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
+
 	log(r)
-	testing := true
+	testing := false
 	if r.Method == "POST" && !testing {
 		//populate form data with form values from request
 		err := r.ParseForm()
@@ -45,19 +46,6 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		//make sure the posted data has the correct format
 		if !r.Form.Has("username") || !r.Form.Has("password") {
 			http.Redirect(w, r, "/static/login.html/?err=formWrongKeys", http.StatusFound)
-			return
-		}
-
-		isBetaUser := false
-		for _, val := range betaUsers {
-			if r.Form.Get("username") == val {
-				isBetaUser = true
-				break
-			}
-		}
-
-		if !isBetaUser {
-			http.Redirect(w, r, "/static/login.html/?err=nonBetaUser", http.StatusFound)
 			return
 		}
 

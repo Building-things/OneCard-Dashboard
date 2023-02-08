@@ -4,6 +4,11 @@ function load_styles(){
     let link = document.createElement('link');
     let link2  = document.createElement('link');
 
+    let script  = document.createElement('script');
+
+    script.src = "https://cdn.jsdelivr.net/npm/apexcharts";
+    script.type = "module";
+
     link.rel = 'stylesheet';
     link.type = 'text/css';
     link.href = './static/css/global.css';
@@ -14,6 +19,7 @@ function load_styles(){
 
     head.appendChild(link);
     head.appendChild(link2);
+    head.appendChild(script);
 }
 
 function remove_elements(){
@@ -23,8 +29,29 @@ function remove_elements(){
     document.querySelector('script[type="text/javascript"]').remove()
 }
 function add_elements(){
+    
     const chartContainer = document.createElement("section")
     chartContainer.innerText = "CHART HERE"
+    chartContainer.id = "radialChart"
+
+    var options = {
+        series: [70],
+        chart: {
+        height: 350,
+        type: 'radialBar',
+      },
+      plotOptions: {
+        radialBar: {
+          hollow: {
+            size: '70%',
+          }
+        },
+      },
+      labels: ['Cricket'],
+    };
+
+
+
     document.querySelector("div.column-left").appendChild(chartContainer)
 }
 
