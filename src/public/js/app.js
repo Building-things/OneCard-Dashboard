@@ -75,7 +75,7 @@ function spending_per_day(){
 
 
     const spending_node = document.createElement("p")
-    spending_node.innerHTML = `You can spend ${daily_budget} per day.`
+    spending_node.innerHTML = `You can spend $${daily_budget} per day.`
     document.querySelector("div.column-right > section").prepend(spending_node)
 }
 
