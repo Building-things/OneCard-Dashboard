@@ -81,12 +81,37 @@ function drawRadialChart() {
   },
   plotOptions: {
     radialBar: {
+      dataLabels: {
+        name: {
+          fontSize: '70px',
+          style: {
+            colors: ['#0099ff']
+          }
+        },
+        value: {
+          fontSize: '35px',
+          style: {
+            colors: ['#0099ff']
+          }
+        },
+        total: {
+          show: true,
+          label: 'Percent Remaining: ',
+          fontSize: '27px',
+          formatter: function () { return Math.round((res_amt_f / starting_amt) * 100)},
+          style: {
+            colors: ['#0099ff']
+          }
+        }
+      },
       hollow: {
         size: '70%',
       }
-    },
+    }
   },
-  labels: ['Remaining'],
+  fill: {
+    colors: ["#0099ff"],
+  },
   };
   
   var chart = new ApexCharts(document.getElementById("#chart"), options);
