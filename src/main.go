@@ -34,8 +34,7 @@ func main() {
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 
 	log(r)
-	testing := false
-	if r.Method == "POST" && !testing {
+	if r.Method == "POST" {
 		//populate form data with form values from request
 		err := r.ParseForm()
 		if err != nil {

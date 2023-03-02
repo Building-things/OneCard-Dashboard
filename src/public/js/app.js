@@ -1,5 +1,5 @@
 function load_styles(){
-    const  head = document.getElementsByTagName('HEAD')[0];
+    const head = document.getElementsByTagName('HEAD')[0];
     
     let link = document.createElement('link');
     let link2  = document.createElement('link');
@@ -8,6 +8,7 @@ function load_styles(){
 
     script.src = "https://cdn.jsdelivr.net/npm/apexcharts";
     script.type = "module";
+
 
     link.rel = 'stylesheet';
     link.type = 'text/css';
@@ -50,7 +51,8 @@ function add_elements(){
       labels: ['Cricket'],
     };
 
-
+    var chart = new ApexCharts(document.querySelector("radialChart"), options);
+    chart.render();
 
     document.querySelector("div.column-left").appendChild(chartContainer)
 }
@@ -75,7 +77,7 @@ function spending_per_day(){
 
 
     const spending_node = document.createElement("p")
-    spending_node.innerHTML = `You can spend $${daily_budget} per day.`
+    spending_node.innerHTML = `You can spend {daily_budget} per day.`
     document.querySelector("div.column-right > section").prepend(spending_node)
 }
 
