@@ -63,3 +63,7 @@ div.column-left > section{
 div.column-left > :not(.summary_transctions){
     width: 60%
 }
+
+#chart{
+    
+}
