@@ -14,6 +14,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 #loginBox{
@@ -47,4 +48,18 @@ form > input{
 
 form > input:not([type=submit]):focus{
     border-bottom: 2px solid var(--accent-color);
+}
+
+#title{
+    margin-bottom: 25px;
+}
+
+
+/* 
+css to make top and bottom decorations not appear on desktop
+ */
+@media (min-width: 600px){
+    .top-decor, .bottom-decor{
+        display: none;
+    }
 }
