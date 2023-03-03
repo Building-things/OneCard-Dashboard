@@ -59,8 +59,9 @@ function add_elements(){
     
     const chartContainer = document.createElement("section")
     chartContainer.id = "#chart"
-    
     document.querySelector("div.column-left").appendChild(chartContainer)
+
+    document.querySelectorAll("section.summary.accounts > ul > li").class = "accounts";
 }
 
 function spending_per_day(){
@@ -82,26 +83,15 @@ function drawRadialChart() {
   plotOptions: {
     radialBar: {
       dataLabels: {
-        name: {
-          fontSize: '70px',
-          style: {
-            colors: ['#0099ff']
-          }
-        },
         value: {
-          fontSize: '35px',
-          style: {
-            colors: ['#0099ff']
-          }
+          fontSize: '35px'
         },
         total: {
           show: true,
           label: 'Percent Remaining: ',
           fontSize: '27px',
-          formatter: function () { return Math.round((res_amt_f / starting_amt) * 100)},
-          style: {
-            colors: ['#0099ff']
-          }
+          formatter: function () { return Math.round((res_amt_f / starting_amt) * 100) + '%'},
+          color: '#ffffff',
         }
       },
       hollow: {
@@ -118,7 +108,6 @@ function drawRadialChart() {
   chart.render();
 
 }
-
 
 
 remove_elements()

@@ -27,7 +27,6 @@ header{
 ul{
     list-style-type: none;
 }
-
 div.column-right > section > ul{
     display: flex;
     flex-direction: column;
@@ -69,4 +68,13 @@ div.column-left > :not(.summary_transctions){
 
 .summary{
     text-align: center;
+}
+
+.summary > ul > li{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+g > text{
+    fill : white !important;
 }
