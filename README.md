@@ -19,5 +19,5 @@ We only provide viewing for account balances and the five most recent transactio
 - Freezing
 - Re-Filling
 - All Transactions
-- Gifting Funds
+- Gifting Funds <br>
 visit the [official ONECard site](https://www.uvic.ca/MyCard/) for the above mentioned functionallity.
